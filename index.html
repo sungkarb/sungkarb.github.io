@@ -3,781 +3,772 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Petri Dish Monthly — My Pet Pseudomonas</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<title>Linux Policy Relationships — Research Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink: #0a0a0a;
-  --paper: #f2eddf;
-  --accent: #b8e04a;
-  --mold: #4abf8a;
-  --rust: #c9553f;
-  --slate: #2c3e50;
-  --pale: #e8e0cc;
-  --col-width: 280px;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0b0d10;
+    --bg2: #131519;
+    --bg3: #1a1d23;
+    --border: rgba(255,255,255,0.07);
+    --border-accent: rgba(255,255,255,0.15);
+    --text: #e8eaed;
+    --text-muted: #8a8f9a;
+    --text-dim: #565c6b;
+    --amber: #e8a830;
+    --amber-dim: rgba(232, 168, 48, 0.12);
+    --teal: #3ec9a7;
+    --teal-dim: rgba(62, 201, 167, 0.1);
+    --blue: #5b9cf6;
+    --blue-dim: rgba(91, 156, 246, 0.1);
+    --red: #e06c75;
+    --red-dim: rgba(224, 108, 117, 0.1);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
 
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'Space Mono', monospace;
-  overflow-x: hidden;
-}
+  html { scroll-behavior: smooth; }
 
-/* ── MASTHEAD ── */
-.masthead {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-}
-.masthead-noise {
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
-  pointer-events: none;
-}
-.masthead-top {
-  border-bottom: 1px solid #333;
-  padding: 10px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-.masthead-main {
-  padding: 30px 40px 20px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-.pub-name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(52px, 10vw, 100px);
-  font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  color: var(--paper);
-}
-.pub-name span {
-  color: var(--accent);
-  font-style: italic;
-}
-.pub-tagline {
-  font-size: 11px;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  opacity: 0.55;
-  margin-top: 12px;
-}
-.issue-strip {
-  background: var(--accent);
-  color: var(--ink);
-  text-align: center;
-  padding: 8px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
 
-/* ── HERO ── */
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 70vh;
-  border-bottom: 3px solid var(--ink);
-}
-.hero-text {
-  padding: 60px 50px;
-  border-right: 2px solid var(--ink);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 24px;
-}
-.kicker {
-  font-size: 10px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--rust);
-  font-weight: 700;
-}
-.headline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(36px, 5vw, 64px);
-  line-height: 1.05;
-  font-weight: 900;
-}
-.headline em {
-  font-style: italic;
-  color: var(--rust);
-}
-.deck {
-  font-size: 14px;
-  line-height: 1.8;
-  opacity: 0.8;
-  max-width: 440px;
-}
-.byline {
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  border-top: 1px solid currentColor;
-  padding-top: 14px;
-  opacity: 0.5;
-}
-.hero-img {
-  position: relative;
-  overflow: hidden;
-  background: #111;
-}
-.hero-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.9;
-  filter: contrast(1.05) saturate(0.7);
-  animation: slowzoom 20s ease-in-out infinite alternate;
-}
-@keyframes slowzoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.06); }
-}
-.hero-caption {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(0,0,0,0.7);
-  color: white;
-  font-size: 10px;
-  padding: 6px 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
+  /* Grid overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-/* ── SECTION LABEL ── */
-.section-label {
-  background: var(--ink);
-  color: var(--accent);
-  padding: 6px 40px;
-  font-size: 10px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--accent);
-  opacity: 0.3;
-}
+  main { position: relative; z-index: 1; }
 
-/* ── INTRO ── */
-.intro-block {
-  padding: 60px 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-  border-bottom: 2px solid var(--ink);
-}
-.intro-col h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  margin-bottom: 16px;
-  line-height: 1.2;
-}
-.intro-col p {
-  font-size: 13px;
-  line-height: 1.9;
-  opacity: 0.8;
-}
-.intro-col p + p { margin-top: 14px; }
-.pull-quote {
-  font-family: 'DM Serif Display', serif;
-  font-size: 22px;
-  line-height: 1.5;
-  font-style: italic;
-  border-left: 4px solid var(--accent);
-  padding-left: 20px;
-  margin: 20px 0;
-  color: var(--slate);
-}
-.fact-box {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 24px;
-  margin-top: 20px;
-}
-.fact-box h3 {
-  font-size: 10px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-.fact-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid #333;
-  gap: 10px;
-}
-.fact-row:last-child { border-bottom: none; }
-.fact-row span:first-child { opacity: 0.6; }
-.fact-row span:last-child { font-weight: 700; text-align: right; color: var(--accent); }
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    background: rgba(11,13,16,0.92);
+    backdrop-filter: blur(12px);
+    padding: 0 4rem;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-/* ── EXPERIMENTS ── */
-.exp-section {
-  border-bottom: 2px solid var(--ink);
-}
-.exp-header {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  align-items: stretch;
-  border-bottom: 1px solid var(--ink);
-}
-.exp-number {
-  background: var(--rust);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  font-weight: 900;
-  font-style: italic;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  padding: 20px 10px;
-  letter-spacing: -0.05em;
-}
-.exp-2 .exp-number { background: var(--mold); }
-.exp-3 .exp-number { background: var(--slate); }
-.exp-title-block {
-  padding: 30px 40px;
-}
-.exp-title-block h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 36px;
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 8px;
-}
-.exp-subtitle {
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  opacity: 0.5;
-}
-.exp-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-}
-.exp-text {
-  padding: 40px 40px;
-  border-right: 1px solid var(--ink);
-}
-.exp-text h3 {
-  font-size: 10px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--rust);
-  margin-bottom: 10px;
-  margin-top: 24px;
-  font-weight: 700;
-}
-.exp-text h3:first-child { margin-top: 0; }
-.exp-2 .exp-text h3 { color: var(--mold); }
-.exp-3 .exp-text h3 { color: var(--slate); }
-.exp-text p {
-  font-size: 13px;
-  line-height: 1.85;
-  opacity: 0.8;
-}
-.hypothesis-box {
-  background: var(--pale);
-  border-left: 4px solid var(--rust);
-  padding: 16px 20px;
-  font-size: 13px;
-  line-height: 1.7;
-  font-style: italic;
-  margin: 16px 0;
-}
-.exp-2 .hypothesis-box { border-left-color: var(--mold); }
-.exp-3 .hypothesis-box { border-left-color: var(--slate); }
-.exp-imgs {
-  padding: 30px;
-  display: grid;
-  gap: 16px;
-  align-content: start;
-}
-.exp-img-wrap {
-  position: relative;
-  overflow: hidden;
-  background: #111;
-}
-.exp-img-wrap img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  filter: contrast(1.05);
-  display: block;
-  transition: transform 0.5s ease;
-}
-.exp-img-wrap:hover img { transform: scale(1.03); }
-.img-label {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  color: white;
-  font-size: 10px;
-  padding: 20px 12px 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.exp-imgs-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.verdict-tag {
-  display: inline-block;
-  background: var(--rust);
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  margin-bottom: 12px;
-}
-.exp-2 .verdict-tag { background: var(--mold); }
-.exp-3 .verdict-tag { background: var(--slate); }
+  .nav-brand {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 
-/* ── CONCLUSION ── */
-.conclusion {
-  padding: 70px 40px;
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 60px;
-  border-bottom: 2px solid var(--ink);
-}
-.conclusion h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 52px;
-  font-weight: 900;
-  line-height: 1.0;
-  margin-bottom: 30px;
-}
-.conclusion p {
-  font-size: 14px;
-  line-height: 1.9;
-  opacity: 0.8;
-  margin-bottom: 18px;
-}
-.future-box {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 30px;
-  position: sticky;
-  top: 20px;
-}
-.future-box h3 {
-  font-size: 10px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-.future-item {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 18px;
-  font-size: 12px;
-  line-height: 1.7;
-}
-.future-item::before {
-  content: '→';
-  color: var(--accent);
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
+  .nav-brand span { color: var(--amber); }
 
-/* ── FOOTER ── */
-.footer {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-}
-.footer-left { opacity: 0.5; }
-.footer-center {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-style: italic;
-  color: var(--accent);
-}
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
 
-/* ── PETRI ANIMATION ── */
-@keyframes bubble {
-  0%, 100% { transform: scale(1) translateY(0); opacity: 0.6; }
-  50% { transform: scale(1.15) translateY(-3px); opacity: 1; }
-}
-.petri-icon {
-  display: inline-block;
-  width: 14px; height: 14px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: bubble 3s ease-in-out infinite;
-  vertical-align: middle;
-  margin: 0 6px;
-}
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
 
-/* ── DIVIDER ── */
-.rule {
-  border: none;
-  border-top: 1px solid var(--ink);
-  margin: 20px 0;
-  opacity: 0.2;
-}
+  .nav-links a:hover { color: var(--text); }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-img { min-height: 340px; }
-  .intro-block { grid-template-columns: 1fr; }
-  .exp-body { grid-template-columns: 1fr; }
-  .exp-text { border-right: none; border-bottom: 1px solid var(--ink); }
-  .conclusion { grid-template-columns: 1fr; }
-}
+  /* HERO */
+  .hero {
+    padding: 6rem 4rem 5rem;
+    border-bottom: 1px solid var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
-/* ── SCROLL ANIMATION ── */
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--amber);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 820px;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--amber);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 620px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .meta-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* SECTION LAYOUT */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    margin-left: auto;
+  }
+
+  /* POLICY CARDS */
+  .policy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .policy-card {
+    background: var(--bg2);
+    padding: 1.5rem;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .policy-card:hover { background: var(--bg3); }
+
+  .policy-card-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+  }
+
+  .accent-amber { background: var(--amber); }
+  .accent-teal { background: var(--teal); }
+  .accent-blue { background: var(--blue); }
+  .accent-red { background: var(--red); }
+
+  .policy-subsystem {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .subsystem-amber { color: var(--amber); }
+  .subsystem-teal { color: var(--teal); }
+  .subsystem-blue { color: var(--blue); }
+  .subsystem-red { color: var(--red); }
+
+  .policy-name {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .policy-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .policy-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    border: 1px solid;
+    letter-spacing: 0.05em;
+  }
+
+  .tag-latency { color: var(--teal); border-color: rgba(62,201,167,0.3); background: var(--teal-dim); }
+  .tag-throughput { color: var(--blue); border-color: rgba(91,156,246,0.3); background: var(--blue-dim); }
+  .tag-fairness { color: var(--amber); border-color: rgba(232,168,48,0.3); background: var(--amber-dim); }
+  .tag-deadline { color: var(--red); border-color: rgba(224,108,117,0.3); background: var(--red-dim); }
+
+  /* TIMESCALE TABLE */
+  .timescale-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .timescale-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-accent);
+    font-weight: 400;
+  }
+
+  .timescale-table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .timescale-table tr:last-child td { border-bottom: none; }
+
+  .timescale-table tr:hover td { background: var(--bg3); }
+
+  .ts-value {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: var(--amber);
+    white-space: nowrap;
+  }
+
+  .ts-context {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .ts-subsystem {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .ts-bar-wrap {
+    padding-top: 6px;
+  }
+
+  .ts-bar {
+    height: 3px;
+    border-radius: 2px;
+    background: var(--amber);
+    opacity: 0.6;
+  }
+
+  /* RELATIONSHIP GRAPH */
+  .rel-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .rel-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-accent);
+    font-weight: 400;
+  }
+
+  .rel-table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .rel-table tr:last-child td { border-bottom: none; }
+  .rel-table tr:hover td { background: var(--bg3); }
+
+  .rel-policy {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--teal);
+  }
+
+  .rel-arrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 0 0.5rem !important;
+  }
+
+  .rel-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .rel-shared { color: var(--blue); border: 1px solid rgba(91,156,246,0.3); background: var(--blue-dim); }
+  .rel-tension { color: var(--red); border: 1px solid rgba(224,108,117,0.3); background: var(--red-dim); }
+  .rel-coupled { color: var(--amber); border: 1px solid rgba(232,168,48,0.3); background: var(--amber-dim); }
+
+  .rel-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* FOOTER */
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .footer-note span { color: var(--text-muted); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav, .hero, .section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding-top: 3rem; }
+    .timescale-table, .rel-table { display: block; overflow-x: auto; }
+  }
 </style>
 </head>
 <body>
 
-<!-- MASTHEAD -->
-<header class="masthead">
-  <div class="masthead-noise"></div>
-  <div class="masthead-top">
-    <span>Spring 2026 · Microbiology Lab</span>
-    <span>Vol. 1 · Issue 1</span>
-    <span>Free with Agar</span>
-  </div>
-  <div class="masthead-main">
-    <div class="pub-name">Petri Dish <span>Monthly</span></div>
-    <div class="pub-tagline">The Premier Publication for Discerning Microbe Enthusiasts</div>
-  </div>
-</header>
-<div class="issue-strip">✦ &nbsp; SPECIAL ISSUE — A SEMESTER WITH <em style="font-style:italic;">PECTOBACTERIUM CAROTOVORUM</em> &nbsp; ✦ &nbsp; FEATURE: THREE EXPERIMENTS, ONE ORGANISM &nbsp; ✦</div>
+<nav>
+  <div class="nav-brand"><span>linux</span> / policy-relationships</div>
+  <ul class="nav-links">
+    <li><a href="#policies">Policies</a></li>
+    <li><a href="#timescales">Time Scales</a></li>
+    <li><a href="#relationships">Cross-Subsystem</a></li>
+  </ul>
+</nav>
+
+<main>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-text">
-    <div class="kicker">Cover Story</div>
-    <h1 class="headline">Meet <em>Pectobacterium carotovorum</em> — My Tiny Little Pet</h1>
-    <p class="deck">
-        Over a single semester, I worked with a working culture of <em>Pectobacterium carotovorum</em> and examined it under three controlled experiments testing its sensitivity to light, its growth in different temperature ranges, and its capacity to infect and spread in potato tissue. The results, condensed here, aim to display physiological capacities of one of agriculture’s most destructive plant pathogens.
-    </p>
-    <div class="byline">By Sungkar &nbsp;·&nbsp; Microbiology Lab, Spring 2026</div>
-  </div>
-  <div class="hero-img">
-    <img src="images/original_culture.jpg">
-    <div class="hero-caption"><em>P. carotovorum</em> streak plate — the original culture</div>
-  </div>
-</section>
-
-<!-- INTRO -->
-<div class="section-label">Introduction <span class="petri-icon"></span> Background</div>
-<section class="intro-block">
-  <div class="intro-col fade-up">
-    <h2>Subject of Study</h2>
-    <p>
-        <em>Pectobacterium carotovorum</em> is a Gram-negative, rod-shaped bacterium (1-3 μm in length) of the family Pectobacteriaceae. It produces pectolytic enzymes that hydrolyze pectin between individual plant cells, which causes cells to separate, a disease that is known as bacterial soft rot. This disease can infect a wide range of hosts (carrot, potato, tomato, leafy greens, squash and other cucurbits, onion, green peppers, African violets, etc.) and is responsible for billions of dollars in annual produce losses worldwide.
-    <p>
-        On nutrient agar, the working strain produces circular, smooth colonies, cream to off-white in color. Colonies typically reach 2-3 mm in diameter after 24-48 hours at 28°C. Unlike its relative <em>P. aeruginosa</em>, <em>P. carotovorum</em> does not produce fluorescent pigments under UV light.
-    </p>
-    <div class="pull-quote">"<em>Pectobacterium carotovorum</em>" is named from Latin and Greek roots referring to its ability to break down pectin and its rod-shaped bacterial form. The species name carotovorum means “of those that devour carrots”, reflecting its role in causing soft rot in carrots and other vegetables</div>
-    <p>
-      It is also an excellent organism to study plant-microbe interactions. The species produce a wide variety of cell-wall-degrading enzymes—pectate lyases, polygalacturonases, cellulases, and proteases—that contribute to destruction of host tissue. Studying it allows us to explore enzymatic interaction at the cellular scale.
-    </p>
-  </div>
-
-  <div class="intro-col fade-up">
-    <h2>Culture Maintenance</h2>
-    <p>
-      The base culture was maintained inside of the nutrient agar plate and held at room temperature (25°C - 26°C). Plates were prepared using the sterile loop technique under a burner flame to preserve colony purity and avoid environmental contamination.
-    </p>
-    <p>
-      Working plates were sealed with Parafilm, labelled with the date and condition, and stored inside of the lab between lab sessions. <em>P. carotovorum</em> is nutritionally undemanding and grows reliably on agar without any supplementation.
-    </p>
-    <p>
-      Three experiments were conducted to characterize bacteria’s physiological properties: (1) sensitivity to different light conditions, (2) thermal tolerance across a 16-37 °C gradient, and (3) its virility on potato tissue.
-    </p>
-    <div class="hypothesis-box" style="margin-top:18px; border-left-color: #2c3e50;">
-      "How adaptable is an organism that infects a such variety of hosts? Three controlled experiments vs one stubborn microbe."
+  <div class="hero-tag">Research Overview</div>
+  <h1>Finding <em>relationships</em> between<br>Linux scheduling policies</h1>
+  <p class="hero-desc">
+    A systematic mapping of how Linux balances latency vs. throughput across scheduler,
+    memory, I/O, and network subsystems — and the hidden dependencies between policies
+    that operate at fundamentally different time scales.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Focus</span>
+      <span class="meta-value">Latency / Throughput tradeoffs</span>
     </div>
-  </div>
-
-  <div class="intro-col fade-up">
-    <div class="fact-box">
-      <h3>Quick Stats — <em>P. carotovorum</em></h3>
-      <div class="fact-row"><span>Cell type</span><span>Gram-negative rod</span></div>
-      <div class="fact-row"><span>Metabolism</span><span>Facultative anaerobe</span></div>
-      <div class="fact-row"><span>Colony color</span><span>Cream / off-white</span></div>
-      <div class="fact-row"><span>Optimal temp</span><span>~27–30°C</span></div>
-      <div class="fact-row"><span>Motility</span><span>Peritrichous flagella</span></div>
-      <div class="fact-row"><span>Habitat</span><span>Soil, water, plant tissue</span></div>
-      <div class="fact-row"><span>Disease</span><span>Bacterial soft rot</span></div>
-      <div class="fact-row"><span>Key enzymes</span><span>Pectinases, cellulases</span></div>
+    <div class="meta-item">
+      <span class="meta-label">Scope</span>
+      <span class="meta-value">Kernel 6.x — all major subsystems</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Method</span>
+      <span class="meta-value">Policy taxonomy + time-constant analysis</span>
     </div>
   </div>
 </section>
 
-<!-- EXPERIMENT 1: LIGHT vs. DARK -->
-<div class="section-label">Experiment 1 <span class="petri-icon"></span> Ligth Sensitivity Experiment</div>
-<section class="exp-section">
-  <div class="exp-header">
-    <div class="exp-number">01</div>
-    <div class="exp-title-block">
-      <h2>Does Visible Light Affect Colony Growth?</h2>
-      <div class="exp-subtitle">Comparing plates incubated in ambient light against dark-incubated controls</div>
-    </div>
+<!-- POLICIES -->
+<section class="section" id="policies">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>Policies that balance latency &amp; throughput</h2>
+    <span class="section-subtitle">per subsystem</span>
   </div>
-  <div class="exp-body">
-    <div class="exp-text fade-up">
-      <h3>Hypothesis</h3>
-      <div class="hypothesis-box">
-        Because <em>P.carotovorum</em> is not photosynthetic and has no known photoreceptor that regulates growth, initial hypothesis for experiment was that visible light will not have measurable effect on its colonies. In experiment, we test for an alternative hypothesis that if left under continuous bench lighting, it would show reduced colony density compared with plates kept in the dark.
-      </div>
 
-      <h3>Methods</h3>
-      <p>
-        Six nutrient agar plates were inoculated with the same grown culture of <em>P. carotovorum</em> using a three-quadrant streak technique, taking care to apply roughly equal inoculum to each plate. In the experiment, two plates were left on lab shelves open under continuous daylight. Two plates were wrapped in aluminum foil to block all visible light and placed near to the light-exposed plates so that conditions other than light were as similar as possible. The remaining two plates were placed in a light incubator.
-      </p>
-      <p>
-        Agar batch, inoculum source, incubation temperature (~25 °C), and incubation time (48–72 h) were held constant. Light exposure was the only independent variable between groups, and the foil-wrapped plates served as the control.
-      </p>
+  <div class="policy-grid">
 
-      <h3>Results</h3>
-      <p>
-        All three groups grew similarly. After one week, all six plates showed confluent streak growth with cream-colored, circular colonies 2-3 mm across. I did not observe any significant differences in colony density, color, or shape between light-exposed, foil wrapped, and normal plates. No contamination was present in either group.
-      </p>
-
-      <h3>Discussion</h3>
-      <div class="verdict-tag">Null Hypothesis Retained</div>
-      <p>
-        The results did not support alternative hypotheses, so the original hypothesis was retained. This outcome makes sense considering what is already known about <em>P. carotovorum</em>: it is an organism with no photoreceptor system known to regulate vegetative growth, so light conditions should not directly influence its growth. Therefore, the result is consistent with established knowledge rather than a sign that the experiment has failed. An interesting follow-up would be to repeat an experiment using germicidal UV-C light, which will cause direct DNA damage and produce a clearly measurable effect.
-      </p>
-    </div>
-    <div class="exp-imgs fade-up">
-      <div class="exp-img-wrap">
-        <img src="images/exp_dark_horizontal.jpg">
-        <div class="img-label">Exp. Dark — 05.12.2026</div>
-      </div>
-      <div class="exp-imgs-grid">
-        <div class="exp-img-wrap">
-            <img src="images/light_vs_dark.jpg">
-          <div class="img-label">Light vs. Dark — side by side</div>
-        </div>
-        <div class="exp-img-wrap">
-            <img src="images/dark_conditions.jpg">
-          <div class="img-label">PA — Dark condition (experimental)</div>
-        </div>
+    <div class="policy-card">
+      <div class="policy-card-accent accent-teal"></div>
+      <div class="policy-subsystem subsystem-teal">Scheduler</div>
+      <div class="policy-name">CFS — Completely Fair Scheduler</div>
+      <div class="policy-desc">Weighted fair-share via virtual runtime (vruntime). Preempts on wakeup if the woken task has a sufficiently smaller vruntime. Tunable via <code>sched_latency_ns</code> and <code>sched_min_granularity_ns</code>.</div>
+      <div class="policy-tags">
+        <span class="tag tag-latency">latency</span>
+        <span class="tag tag-fairness">fairness</span>
+        <span class="tag tag-throughput">throughput</span>
       </div>
     </div>
+
+    <div class="policy-card">
+      <div class="policy-card-accent accent-teal"></div>
+      <div class="policy-subsystem subsystem-teal">Scheduler</div>
+      <div class="policy-name">EEVDF (v6.6+)</div>
+      <div class="policy-desc">Earliest Eligible Virtual Deadline First — replaces CFS preemption heuristics with a deadline-based pick. Reduces latency variance while preserving throughput.</div>
+      <div class="policy-tags">
+        <span class="tag tag-latency">latency</span>
+        <span class="tag tag-deadline">deadline</span>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-card-accent accent-red"></div>
+      <div class="policy-subsystem subsystem-red">Scheduler</div>
+      <div class="policy-name">SCHED_FIFO / SCHED_RR</div>
+      <div class="policy-desc">Real-time policies. FIFO runs until block/yield; RR adds a timeslice. Hard latency guarantees at the cost of starvation risk for non-RT tasks.</div>
+      <div class="policy-tags">
+        <span class="tag tag-latency">latency</span>
+        <span class="tag tag-deadline">real-time</span>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-card-accent accent-blue"></div>
+      <div class="policy-subsystem subsystem-blue">I/O</div>
+      <div class="policy-name">mq-deadline</div>
+      <div class="policy-desc">Assigns per-request deadlines. Batches requests within a window (<code>fifo_expire_*</code>) to favour throughput, but guarantees deadline expiry for latency-sensitive I/O.</div>
+      <div class="policy-tags">
+        <span class="tag tag-deadline">deadline</span>
+        <span class="tag tag-throughput">throughput</span>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-card-accent accent-blue"></div>
+      <div class="policy-subsystem subsystem-blue">I/O</div>
+      <div class="policy-name">BFQ — Budget Fair Queuing</div>
+      <div class="policy-desc">Assigns budgets (sectors) proportionally. Achieves low latency for interactive workloads by tracking idle state and serialising on the "in-service entity" tree.</div>
+      <div class="policy-tags">
+        <span class="tag tag-latency">latency</span>
+        <span class="tag tag-fairness">fairness</span>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-card-accent accent-blue"></div>
+      <div class="policy-subsystem subsystem-blue">I/O</div>
+      <div class="policy-name">Kyber</div>
+      <div class="policy-desc">Lightweight scheduler for NVMe/fast storage. Maintains separate read/write token buckets; adjusts queue depth to hit configurable latency targets.</div>
+      <div class="policy-tags">
+        <span class="tag tag-latency">latency</span>
+        <span class="tag tag-throughput">throughput</span>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-card-accent accent-amber"></div>
+      <div class="policy-subsystem subsystem-amber">Memory</div>
+      <div class="policy-name">NUMA Balancing</div>
+      <div class="policy-desc">Periodically scans and migrates pages toward the NUMA node where they are accessed. Trades migration overhead (latency spike) for long-term bandwidth locality.</div>
+      <div class="policy-tags">
+        <span class="tag tag-throughput">throughput</span>
+        <span class="tag tag-latency">latency</span>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-card-accent accent-amber"></div>
+      <div class="policy-subsystem subsystem-amber">Memory</div>
+      <div class="policy-name">kswapd / direct reclaim</div>
+      <div class="policy-desc">kswapd proactively reclaims pages in background; direct reclaim is synchronous and occurs in the allocating task context. Their relative rate determines allocation latency.</div>
+      <div class="policy-tags">
+        <span class="tag tag-latency">latency</span>
+        <span class="tag tag-throughput">throughput</span>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="policy-card-accent accent-amber"></div>
+      <div class="policy-subsystem subsystem-amber">Network</div>
+      <div class="policy-name">TCP pacing + BBR</div>
+      <div class="policy-desc">BBR estimates bottleneck bandwidth and RTprop to pace sends. Avoids buffer-bloat, reducing RTT at the cost of some peak throughput on shallow-buffered paths.</div>
+      <div class="policy-tags">
+        <span class="tag tag-latency">latency</span>
+        <span class="tag tag-throughput">throughput</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- EXPERIMENT 2: TEMPERATURE -->
-<div class="section-label">Experiment 2 <span class="petri-icon"></span> Thermal Tolerance Experiment</div>
-<section class="exp-section exp-2">
-  <div class="exp-header">
-    <div class="exp-number">02</div>
-    <div class="exp-title-block">
-      <h2>Defining the Thermal Envelope of a Mesophilic Plant Pathogen</h2>
-      <div class="exp-subtitle">Colony development across a four-point temperature gradient — 16 °C, 20 °C, 30 °C, and 37 °C</div>
-    </div>
+<!-- TIMESCALES -->
+<section class="section" id="timescales">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>All time scales Linux operates on</h2>
+    <span class="section-subtitle">nanoseconds → minutes</span>
   </div>
-  <div class="exp-body">
-    <div class="exp-text fade-up">
-      <h3>Hypothesis</h3>
-      <div class="hypothesis-box">
-        Considering established growth optima of 27–30 °C for <em>Pectobacterium</em>, colony development was predicted to be maximal at 30 °C, intermediate at 20 °C and 37 °C, and minimal at 16 °C. Notably, the 30 °C temperature was expected to outperform the 37 °C condition, which would distinguish <em>P. carotovorum</em> from mammalian-associated bacteria that favor host body temperature.      </div>
-      <h3>Methods</h3>
-      <p>
-        Each nutrient agar plate was streak-inoculated with a base culture and partitioned equally among four temperature treatments (n = 2 per treatment): 16 °C, 20 °C, 30 °C, and 37 °C. Plates were transferred to dedicated temperature incubators for the duration of the week.
-      </p>
-      <p>
-        Inoculation technique, agar batch, plating volume, and incubation duration were held constant; temperature constituted the sole independent variable. The 30 °C treatment, corresponding most closely to the established optimum, served as the reference condition. Colony density and structure were assessed visually and documented photographically at the end of an experiment.      </p>
-      <h3>Results</h3>
-      <p>
-        A monotonic increase in colony density was observed up to 30 °C. Plates at 16 °C produced sparse, faintly visible streaks; at 20 °C, growth was denser but remained significantly tempered. At 30 °C, plates exhibited dense, confluent, opaque streaks that most closely resemble the characteristics of healthy <em>P. carotovorum</em>. At 37 °C, growth was indistinguishable relative to 30 °C, with thinner streaks and slightly different colony margins, which is consistent with the upper margin of the organism’s temperature tolerance.      </p>
-      <p>
-        All four treatments yielded measurable growth, confirming the broad thermal range of the species. However, effects were distinctly non-linear, with a clear peak of bacterial growth at 30 °C.      </p>
-      <h3>Discussion</h3>
-      <div class="verdict-tag">Hypothesis Supported</div>
-      <p>
-The hypothesis was supported with growth being maximum at 30 °C and declined at both temperature extremes, including  37 °C. The resulting growth pattern is consistent with the established knowledge on <em>P. carotovorum</em>. The attenuation observed at 37 °C signifies significant biological different: in contrast to <em>P. aeruginosa</em>, which thrives at human body temperature, <em>P. carotovorum</em> approaches the upper limit of viability at 37 °C — a limitation that is widely cited as one reason that it does not endanger humans.      </p>
-    </div>
-    <div class="exp-imgs fade-up">
-      <div class="exp-img-wrap">
-        <img src="images/temperatures_1_horizontal.jpg">
-        <div class="img-label">All 4 temperature conditions (04.09.2026)</div>
-      </div>
-      <div class="exp-img-wrap">
-        <img src="images/temperatures_2_horizontal.jpg">
-        <div class="img-label">T 16°C, 20°C, 30°C, 37°C — replicate plates</div>
-      </div>
-    </div>
-  </div>
+
+  <table class="timescale-table">
+    <thead>
+      <tr>
+        <th>Time constant</th>
+        <th>Typical value</th>
+        <th>Subsystem / mechanism</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="ts-value">~1–4 ns</td>
+        <td class="ts-context">L1 cache / register access</td>
+        <td class="ts-subsystem">Architecture</td>
+        <td class="rel-desc">Lower bound on any kernel-visible operation; used implicitly in scheduler cost models</td>
+      </tr>
+      <tr>
+        <td class="ts-value">~100 ns</td>
+        <td class="ts-context">Syscall round-trip</td>
+        <td class="ts-subsystem">Trap / context switch</td>
+        <td class="rel-desc">Minimum latency for entering/exiting kernel; sets floor for I/O response</td>
+      </tr>
+      <tr>
+        <td class="ts-value">750 µs</td>
+        <td class="ts-context"><code>sched_min_granularity_ns</code></td>
+        <td class="ts-subsystem">CFS / EEVDF</td>
+        <td class="rel-desc">Minimum time a task runs before being preemptable — prevents excessive context switches</td>
+      </tr>
+      <tr>
+        <td class="ts-value">6 ms</td>
+        <td class="ts-context"><code>sched_latency_ns</code></td>
+        <td class="ts-subsystem">CFS / EEVDF</td>
+        <td class="rel-desc">Target scheduling period — each runnable task should run once per this window</td>
+      </tr>
+      <tr>
+        <td class="ts-value">4 ms</td>
+        <td class="ts-context">Default HZ=250 tick</td>
+        <td class="ts-subsystem">Timer subsystem</td>
+        <td class="rel-desc">Drives per-CPU load balancing, kswapd wakeup cadence, TCP keepalive accounting</td>
+      </tr>
+      <tr>
+        <td class="ts-value">10 ms</td>
+        <td class="ts-context">RT bandwidth quota window</td>
+        <td class="ts-subsystem">RT throttling</td>
+        <td class="rel-desc">Limits fraction of CPU RT tasks can consume; prevents starvation of CFS tasks</td>
+      </tr>
+      <tr>
+        <td class="ts-value">100 ms</td>
+        <td class="ts-context">NUMA scan period start</td>
+        <td class="ts-subsystem">NUMA balancing</td>
+        <td class="rel-desc">Initial period before raising to up to 1000 ms adaptively based on migration benefit</td>
+      </tr>
+      <tr>
+        <td class="ts-value">200 ms</td>
+        <td class="ts-context">BFQ slice idle timeout</td>
+        <td class="ts-subsystem">I/O scheduler</td>
+        <td class="rel-desc">How long BFQ waits for the in-service queue to issue a new request before reselecting</td>
+      </tr>
+      <tr>
+        <td class="ts-value">500 ms</td>
+        <td class="ts-context">kswapd wakeup threshold area</td>
+        <td class="ts-subsystem">Memory reclaim</td>
+        <td class="rel-desc">Approximate cadence at which kswapd scans zones; varies with memory pressure</td>
+      </tr>
+      <tr>
+        <td class="ts-value">1 s</td>
+        <td class="ts-context">PELT half-life</td>
+        <td class="ts-subsystem">Load tracking (CFS/EAS)</td>
+        <td class="rel-desc">Per-Entity Load Tracking decays with ~32 ms period; 1 s to reach ~3% of peak signal</td>
+      </tr>
+      <tr>
+        <td class="ts-value">5–10 s</td>
+        <td class="ts-context">TCP keepalive probes begin</td>
+        <td class="ts-subsystem">Network stack</td>
+        <td class="rel-desc">After <code>tcp_keepalive_time</code> idle, probes sent every <code>tcp_keepalive_intvl</code></td>
+      </tr>
+      <tr>
+        <td class="ts-value">30 s</td>
+        <td class="ts-context">Dirty page writeback deadline</td>
+        <td class="ts-subsystem">Page cache / writeback</td>
+        <td class="rel-desc"><code>dirty_expire_centisecs</code>: age at which dirty pages must be flushed regardless of I/O pressure</td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
-<!-- EXPERIMENT 3: POTATO INOCULATION -->
-<div class="section-label">Experiment 3 <span class="petri-icon"></span> Host-Tissue Pathogenicity Experiment</div>
-<section class="exp-section exp-3">
-  <div class="exp-header">
-    <div class="exp-number">03</div>
-    <div class="exp-title-block">
-      <h2>Pathogenicity Assessment on Potato Tissue</h2>
-      <div class="exp-subtitle">Splash inoculation of potato slices — a qualitative examination of soft-rot induction</div>
-    </div>
+<!-- CROSS-SUBSYSTEM RELATIONSHIPS -->
+<section class="section" id="relationships">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Cross-subsystem policy relationships</h2>
+    <span class="section-subtitle">structural dependencies</span>
   </div>
-  <div class="exp-body">
-    <div class="exp-text fade-up">
-      <h3>Hypothesis</h3>
-      <div class="hypothesis-box">
-Given the well-established capacity of <em>P. carotovorum</em> to produce pectinolytic enzymes capable of degrading plant cell walls, potato slices inoculated with a liquid culture suspension are predicted to exhibit greater tissue rotting, browning, and softening within a week than uninoculated control slices that were maintained under identical humidity and temperature conditions.      </div>
 
-      <h3>Methods</h3>
-      <p>
-        Potato slices were surface-sterilized with 70% ethanol, peeled, and prepared using a sterile blade. Slices were placed on moistened sterile filter paper within individual petri dishes to establish a microenvironment favorable to bacterial activity. Two dishes received a splash inoculation of <em>P. carotovorum</em> liquid culture (24-h nutrient broth) applied directly to the cut surface. A third dish, designed as the negative control, received an equivalent volume of sterile nutrient broth administered in the same fashion.
-      </p>
-      <p>
-        All dishes were sealed using Parafilm and incubated at room temperature (~25°C) for one week. Tissue coloration, surface texture, structural integrity, and any visible bacterial overgrowth were documented photographically throughout the incubation period.
-      </p>
-
-      <h3>Results</h3>
-      <p>
-Inoculated slices displayed significant browning and darkening localized around the inoculation place and progressed to a softened, glistened texture within one week which are early signs of early-stage soft rot. Control slices darkened only slightly and uniformly around the cut surface.       </p>
-      <p>
-Some colonies were not visible on the potato slice surface but discoloration of the inoculated tissue was localized and uneven — features absent in the control      </p>
-
-      <h3>Discussion</h3>
-      <div class="verdict-tag">Hypothesis Partially Supported</div>
-      <p>
-The different response between inoculated and control slices is consistent with the established behavior of the species: secretion of pectate lyases that hydrolyze potato tissue, which makes it produce a characteristic macerated, water-soaked phenotype. Because cut potato tissue naturally browns due to enzymes like polyphenol oxidase, a better experiment would use heat-killed bacteria to separate true bacterial effects from normal effects of exposure to oxygen. Using measurable outcomes — such as the size of the softened area, weight loss, or change in pH around infection size — would make the results more tangible, so the current findings suggest pathogenicity but are not yet definitive.      </p>
-    </div>
-    <div class="exp-imgs fade-up">
-      <div class="exp-img-wrap">
-        <img src="images/control_innoculation_horizontal.jpg">
-        <div class="img-label">Control - Sungkar Potato</div>
-      </div>
-      <div class="exp-imgs-grid">
-        <div class="exp-img-wrap">
-            <img src="images/control_vs_splash.jpg">
-          <div class="img-label">Control vs. splash inoculation (day 3)</div>
-        </div>
-        <div class="exp-img-wrap">
-            <img src="images/innoculated_slices.jpg">
-          <div class="img-label">Inoculated slices — visible browning</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <table class="rel-table">
+    <thead>
+      <tr>
+        <th>Policy A</th>
+        <th></th>
+        <th>Policy B</th>
+        <th>Relationship type</th>
+        <th>Mechanism</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rel-policy">CFS / EEVDF</td>
+        <td class="rel-arrow">⟷</td>
+        <td class="rel-policy">kswapd</td>
+        <td><span class="rel-type rel-coupled">coupled</span></td>
+        <td class="rel-desc">kswapd is scheduled as a kernel thread under CFS; memory pressure raises kswapd priority, competing with latency-sensitive tasks for CPU</td>
+      </tr>
+      <tr>
+        <td class="rel-policy">BFQ</td>
+        <td class="rel-arrow">⟷</td>
+        <td class="rel-policy">CFS / EEVDF</td>
+        <td><span class="rel-type rel-shared">shared model</span></td>
+        <td class="rel-desc">BFQ's budget-based fairness mirrors CFS vruntime logic; both use per-entity trees with a common fair-share abstraction</td>
+      </tr>
+      <tr>
+        <td class="rel-policy">NUMA balancing</td>
+        <td class="rel-arrow">⟷</td>
+        <td class="rel-policy">CFS task placement</td>
+        <td><span class="rel-type rel-coupled">coupled</span></td>
+        <td class="rel-desc">NUMA fault handler hints to the scheduler to migrate the task alongside its pages; CFS load balancer can undo this if CPU imbalance dominates</td>
+      </tr>
+      <tr>
+        <td class="rel-policy">RT throttling</td>
+        <td class="rel-arrow">⟷</td>
+        <td class="rel-policy">mq-deadline</td>
+        <td><span class="rel-type rel-tension">tension</span></td>
+        <td class="rel-desc">RT tasks driving I/O can starve mq-deadline's normal queue; if RT bandwidth is capped, deadline expiry in the I/O layer may trigger before the task is scheduled</td>
+      </tr>
+      <tr>
+        <td class="rel-policy">TCP BBR / pacing</td>
+        <td class="rel-arrow">⟷</td>
+        <td class="rel-policy">CFS timeslice</td>
+        <td><span class="rel-type rel-tension">tension</span></td>
+        <td class="rel-desc">BBR's pacing timer fires via hrtimer; if CFS schedules the softirq thread late, pacing gaps widen, inflating measured RTprop and mistuning the BBR model</td>
+      </tr>
+      <tr>
+        <td class="rel-policy">Page writeback</td>
+        <td class="rel-arrow">⟷</td>
+        <td class="rel-policy">BFQ / mq-deadline</td>
+        <td><span class="rel-type rel-coupled">coupled</span></td>
+        <td class="rel-desc">Writeback threads submit I/O tagged as background; both BFQ and mq-deadline deprioritise these — but their background queue rules differ, affecting dirty-page lag differently</td>
+      </tr>
+      <tr>
+        <td class="rel-policy">PELT load tracking</td>
+        <td class="rel-arrow">⟷</td>
+        <td class="rel-policy">cpufreq / EAS</td>
+        <td><span class="rel-type rel-shared">shared model</span></td>
+        <td class="rel-desc">Energy-Aware Scheduling reads CFS per-entity utilisation signals to select OPP; the same PELT signal drives both frequency scaling and task placement decisions</td>
+      </tr>
+      <tr>
+        <td class="rel-policy">kswapd / direct reclaim</td>
+        <td class="rel-arrow">⟷</td>
+        <td class="rel-policy">Kyber token buckets</td>
+        <td><span class="rel-type rel-tension">tension</span></td>
+        <td class="rel-desc">Under memory pressure, direct reclaim submits synchronous read I/O; Kyber's read token bucket may be depleted by unrelated foreground I/O, blocking reclaim and extending allocation latency</td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
-<!-- CONCLUSION -->
-<div class="section-label">Synthesis <span class="petri-icon"></span> General Discussion</div>
-<section class="conclusion">
-  <div class="fade-up">
-    <h2>General Discussion</h2>
-    <p>
-Across three experiments, <em>Pectobacterium carotovorum</em> behaved as expected in close accordance to predictions drawn from existing microbiological literature. The main value of the work resides not in the novel discovery but in the demonstration that these predictions are reproducible using standard undergraduate methodology.    </p>
-    <p>
-The temperature range experiment yielded the most informative result with the best colony development measured at 30 °C and the visible attenuation at 37 °C which suggest that bacteria exhibit a thermal “optimum”. Comparing it to <em>Pseudomonas aeruginosa</em> is helpful because even small differences in how bacteria handle temperatures and how their cell membranes are structured can separate plant-infecting species from those that infect humans.    </p>
-    <p>
-The potato inoculation experiment produces the most unclear results. Even though inoculated slices consistently browned more than the controls, the setup didn’t include enough controls to reliably tell whether this was due to bacterial tissue breakdown or just natural browning due to polyphenol oxidase. A stronger design would include a heat-killed bacteria control as a way to measure how much softening occurs.     </p>
-    <p>
-      The light experiment showed no visible effect, which is still meaningful given what we already know about <em>Pectobacterium carotovorum</em>. Finding no response to visible light helps narrow things down and suggest that testing germicidal UV-C light is more likely to produce a detectable effect. Results of this experiment can guide how experiments can be conducted and focused in the future.
-    </p>
-    <p>
-      More importantly, this semester reinforced the idea that the organism behaves according to its environment and not to the experimenter’s expectations. It grows when conditions allow and stops when they don’t, so the goal is to design experiments cleanly enough that the results reflect the organism’s behavior rather than the researcher’s assumptions.
-    </p>
-  </div>
-  <div>
-    <div class="future-box fade-up">
-      <h3>Proposed Future Work</h3>
-      <div class="future-item">
+</main>
 
-Test how the bacterium responds to different antibiotics using a disk diffusion test, where antibiotic-soaked disks are placed on a bacterial lawn and the size of the clear zones shows how strongly each drug inhibits growth.</div>
-      <div class="future-item">Measure the ability of the bacteria to form biofilms by growing it in microplate wells, staining attached cells with crystal violet, and quantifying how much bacteria stick to surfaces.</div>
-      <div class="future-item">Repeat the light exposure experiment using UV-C (254 nm), a much more damaging wavelength for DNA, to see whether it produces a measurable reduction in bacteria growth.</div>
-    </div>
+<footer>
+  <div class="footer-note">
+    <span>Linux kernel policy taxonomy</span> — research in progress
   </div>
-</section>
-
-<!-- EXTRA IMAGE -->
-<div style="padding: 0; border-bottom: 2px solid var(--ink);">
-  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; height:340px;">
-    <div style="overflow:hidden; border-right:1px solid var(--ink);">
-        <img src="images/original_culture_horizontal.jpg" style="width: 100%; height: 100%; object-fit: fill;">
-    </div>
-    <div style="background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;border-right:1px solid #333;">
-      <div>
-        <div style="font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Final Observation</div>
-        <div style="font-family:'DM Serif Display',serif;font-size:24px;font-style:italic;line-height:1.5;">"It's not the biggest. It's not the flashiest. But it is deadly"</div>
-      </div>
-    </div>
-    <div style="overflow:hidden;">
-        <img src="images/temperatures_1_horizontal.jpg" style="width: 100%; height: 100%; object-fit: fill;">
-    </div>
+  <div class="footer-note">
+    Kernel <span>6.x</span> · subsystems: sched, mm, block, net
   </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-left">Microbiology Lab · Spring 2026 · Sungkar</div>
-  <div class="footer-center">Petri Dish Monthly</div>
-  <div class="footer-left">All cultures handled responsibly · No microbes were harmed*<br><span style="font-size:9px;">*some were streaked</span></div>
 </footer>
 
-<script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
 </body>
 </html>
